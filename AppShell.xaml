@@ -7,8 +7,16 @@
     Title="Receptkonyv_MAUI">
 
     <ShellContent
-        Title="Home"
+        Title="Recipe Book"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    <ShellContent
+        Title="Recipes"
+        ContentTemplate="{DataTemplate local:RecipePage}"
+        Route="RecipePage" />
+    <ShellContent
+        Title="Filter Recipes"
+        ContentTemplate="{DataTemplate local:FilterPage}"
+        Route="FilterPage"/>
 
 </Shell>
