@@ -1,19 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Receptkonyv_MAUI"
+             x:DataType="local:MainPageViewModel"
              x:Class="Receptkonyv_MAUI.MainPage">
 
-    <Grid RowDefinitions="Auto, *" WidthRequest="300" RowSpacing="10" Padding="0, 10">
+    <Grid RowDefinitions="Auto, *" RowSpacing="10" Padding="0, 10">
         <HorizontalStackLayout HorizontalOptions="Center">
-            <VerticalStackLayout Spacing="10" VerticalOptions="Center">
-                <Button Text="Add Recipe" WidthRequest="150"/>
-                <Button Text="Filter Recipes" WidthRequest="150"/>
+            <VerticalStackLayout VerticalOptions="Center" Spacing="10">
+                <Button Text="Add Recipe" WidthRequest="150" Command="{Binding AddRecipeCommand}"/>
+                <Button Text="Filter Recipes" WidthRequest="150" Command="{Binding FilterRecipeCommand}"/>
+                <Button Text="Select Recipe" WidthRequest="150" Command="{Binding RecipeSelectedCommand}"/>
             </VerticalStackLayout>
         </HorizontalStackLayout>
-        <Border>
-        <CollectionView>
-            
-        </CollectionView>
+        <Border Grid.Row="1">
+        <CollectionView ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" SelectionMode="Single" BackgroundColor="LightPink">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Recipe">
+                        <Border Margin="5" Padding="10" BackgroundColor="LightYellow">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium"/>
+                                <Label Text="{Binding Description}" FontSize="Small"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Border>
     </Grid>
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Receptkonyv_MAUI.RecipeDetailPage"
+             Title="RecipeDetailPage">
+    <VerticalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+        <Label Text="Name"/>
+        <Entry/>
+        <Label Text="Ingredients"/>
+        <Entry/>
+        <Label Text="Description"/>
+        <Entry/>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Button Text="Edit" BackgroundColor="PaleGreen"/>
+                <Button Text="Save" BackgroundColor="LightSkyBlue"/>
+                <Button Text="Delete" BackgroundColor="PaleVioletRed"/>
+                <Button Text="Share" BackgroundColor="Aqua"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+</ContentPage>

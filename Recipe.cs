@@ -23,6 +23,9 @@ namespace Receptkonyv_MAUI
 
         [ObservableProperty]
         string pictureUrl;
-
+        public Recipe GetCopy()
+        {
+            return (Recipe)this.MemberwiseClone();
+        }
     }
 }

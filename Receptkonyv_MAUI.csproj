@@ -66,10 +66,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="RecipeDetailPage.xaml.cs">
+	    <DependentUpon>RecipeDetailPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="FilterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RecipePage.xaml">
+	  <MauiXaml Update="RecipeDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

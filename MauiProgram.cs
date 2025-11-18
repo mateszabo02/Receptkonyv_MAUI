@@ -14,9 +14,12 @@ namespace Receptkonyv_MAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddTransient<RecipeDetailPage>();
+            builder.Services.AddTransient<RecipeDetailPageViewModel>();
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
