@@ -5,30 +5,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//[QueryProperty(nameof(SelectPet), "SelectPet")]
 namespace Receptkonyv_MAUI
 {
-    [QueryProperty(nameof(editedRecipe), "Recipe")]
+    [QueryProperty(nameof(ViewedRecipe), "Recipe")]
     public partial class RecipeDetailPageViewModel : ObservableObject
     {
         [ObservableProperty]
-        Recipe editedRecipe;
+        Recipe viewedRecipe;
         [ObservableProperty]
         Recipe draft;
-
-        public void InitDraft()
+        public Recipe EditedRecipe
         {
-            Draft = editedRecipe.GetCopy();
+            set
+            {
+                EditedRecipe = ViewedRecipe;
+            }
+        }
+        partial void OnViewedRecipeChanged(Recipe value)
+        {
+            InitDraft(value);
+        }
+        public void InitDraft(Recipe value)
+        {
+            if (value != null)
+                Draft = value.GetCopy();
+            else
+            {
+                Draft = new Recipe { Name = "---", Ingredients = new() { "-", "-" }, Description = "---" };
+            }
         }
         [RelayCommand]
-        public async Task SaveRecipe()
+        public async Task EditRecipe()
         {
             var param = new ShellNavigationQueryParameters
             {
-                { "SelectedRecipe", Draft }
+                { "Recipe", ViewedRecipe }
             };
-            await Shell.Current.GoToAsync("..", param);
+            await Shell.Current.GoToAsync("editRecipePage", param);
+
         }
-        
     }
 }

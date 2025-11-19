@@ -7,6 +7,7 @@
             InitializeComponent();
             Routing.RegisterRoute("recipeDetailPage", typeof(RecipeDetailPage));
             Routing.RegisterRoute("filterPage", typeof(FilterPage));
+            Routing.RegisterRoute("editRecipePage", typeof(EditRecipePage));
         }
     }
 }

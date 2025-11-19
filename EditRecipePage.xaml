@@ -2,20 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Receptkonyv_MAUI"
-             x:Class="Receptkonyv_MAUI.RecipeDetailPage"
-             x:DataType="local:RecipeDetailPageViewModel"
-             Title="RecipeDetailPage">
+             x:Class="Receptkonyv_MAUI.EditRecipePage"
+             x:DataType="local:EditRecipePageViewModel"
+             Title="EditRecipePage">
     <VerticalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
         <Label Text="Name"/>
-        <Label Text="{Binding ViewedRecipe.Name}"/>
+        <Entry Text="{Binding EditedRecipe.Name}"/>
         <Label Text="Ingredients"/>
-        <Label Text="{Binding ViewedRecipe.Ingredients}"/>
+        <Entry Text="{Binding EditedRecipe.Ingredients}"/>
         <Label Text="Description"/>
-        <Label Text="{Binding ViewedRecipe.Description}"/>
+        <Entry Text="{Binding EditedRecipe.Description}"/>
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-            <Button Text="Edit" BackgroundColor="PaleGreen" Command="{Binding EditRecipeCommand}"/>
-            <Button Text="Delete" BackgroundColor="PaleVioletRed"/>
-            <Button Text="Share" BackgroundColor="Aqua"/>
+            <Button Text="Cancel Edit" BackgroundColor="PaleGreen" Command="{Binding CancelEditCommand}"/>
+            <Button Text="Save" BackgroundColor="LightSkyBlue" Command="{Binding SaveEditCommand}"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

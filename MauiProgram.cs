@@ -18,6 +18,8 @@ namespace Receptkonyv_MAUI
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddTransient<RecipeDetailPage>();
             builder.Services.AddTransient<RecipeDetailPageViewModel>();
+            builder.Services.AddTransient<EditRecipePage>();
+            builder.Services.AddTransient<EditRecipePageViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

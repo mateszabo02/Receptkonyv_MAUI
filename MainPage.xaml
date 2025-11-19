@@ -10,11 +10,10 @@
             <VerticalStackLayout VerticalOptions="Center" Spacing="10">
                 <Button Text="Add Recipe" WidthRequest="150" Command="{Binding AddRecipeCommand}"/>
                 <Button Text="Filter Recipes" WidthRequest="150" Command="{Binding FilterRecipeCommand}"/>
-                <Button Text="Select Recipe" WidthRequest="150" Command="{Binding RecipeSelectedCommand}"/>
             </VerticalStackLayout>
         </HorizontalStackLayout>
         <Border Grid.Row="1">
-        <CollectionView ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" SelectionMode="Single" BackgroundColor="LightPink">
+        <CollectionView ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}" SelectionMode="Single" SelectionChangedCommand="{Binding RecipeSelectedCommand}" SelectionChangedCommandParameter="{Binding SelectedRecipe}" BackgroundColor="LightPink">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:Recipe">
                         <Border Margin="5" Padding="10" BackgroundColor="LightYellow">

@@ -17,23 +17,28 @@ namespace Receptkonyv_MAUI
         [ObservableProperty]
         private Recipe selectedRecipe;
 
-        //[ObservableProperty]
-        //private Recipe editedRecipe;
+        public Recipe ViewedRecipe
+        {
+            set
+            {
+                ViewedRecipe = SelectedRecipe;
+            }
+        }
 
         public MainPageViewModel()
         {
             Recipes = new ObservableCollection<Recipe>();
             Recipes = new ObservableCollection<Recipe>
             {
-                new Recipe { Name = "Spaghetti Bolognese", Description = "A classic Italian pasta dish with rich meat sauce." },
-                new Recipe { Name = "Chicken Curry", Description = "A flavorful curry dish with tender chicken pieces." },
-                new Recipe { Name = "Vegetable Stir Fry", Description = "A quick and healthy stir fry with fresh vegetables." }
+                new Recipe { Name = "Spaghetti Bolognese", Ingredients=new List<string>(){"Spaghetti", "Tomato sauce" },Description = "A classic Italian pasta dish with rich meat sauce." },
+                new Recipe { Name = "Chicken Curry",  Ingredients=new List<string>(){"Chicken", "Curry"},Description = "A flavorful curry dish with tender chicken pieces." },
+                new Recipe { Name = "Vegetable Stir Fry",  Ingredients=new List<string>(){"Vegetables", "Pasta"},Description = "A quick and healthy stir fry with fresh vegetables." }
             };
         }
         [RelayCommand]
         public async Task AddRecipe()
         {
-            await Shell.Current.GoToAsync("recipePage");
+            await Shell.Current.GoToAsync("recipeDetailPage");
         }
         [RelayCommand]
         public async Task FilterRecipe()
@@ -42,7 +47,7 @@ namespace Receptkonyv_MAUI
         }
 
         [RelayCommand]
-        public async Task OnRecipeSelected()
+        public async Task RecipeSelected()
         {
             if (SelectedRecipe != null)
             {
@@ -50,12 +55,13 @@ namespace Receptkonyv_MAUI
                 {
                     { "Recipe", SelectedRecipe }
                 };
-                await Shell.Current.GoToAsync("recipePage", param);
+                await Shell.Current.GoToAsync("recipeDetailPage", param);
             }
             else
             {
                 WeakReferenceMessenger.Default.Send("No recipe selected");
             }
+            SelectedRecipe = null;
         }
     }
 }

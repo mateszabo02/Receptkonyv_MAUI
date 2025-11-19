@@ -5,12 +5,12 @@ namespace Receptkonyv_MAUI
 {
     public partial class MainPage : ContentPage
     {
-        private MainPageViewModel viewModel;
-        public MainPage()
+        //private MainPageViewModel viewModel;
+        public MainPage(MainPageViewModel VM)
         {
             InitializeComponent();
-            viewModel = new MainPageViewModel();
-            BindingContext = viewModel;
+            VM = new MainPageViewModel();
+            BindingContext = VM;
         }
     }
 }
