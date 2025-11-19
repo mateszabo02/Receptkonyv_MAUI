@@ -1,12 +1,17 @@
+using CommunityToolkit.Mvvm.Messaging;
+
 namespace Receptkonyv_MAUI;
 
 public partial class EditRecipePage : ContentPage
 {
-	//private EditRecipePageViewModel viewModel;
 	public EditRecipePage(EditRecipePageViewModel VM)
 	{
 		InitializeComponent();
-		VM = new EditRecipePageViewModel();
 		BindingContext = VM;
-	}
+        WeakReferenceMessenger.Default.Register<string>(this, (r, msg) =>
+        {
+            DisplayAlert("Warning", msg, "OK");
+
+        });
+    }
 }

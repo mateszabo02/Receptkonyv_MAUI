@@ -6,7 +6,6 @@ namespace Receptkonyv_MAUI
         public RecipeDetailPage(RecipeDetailPageViewModel VM)
         {
             InitializeComponent();
-            VM = new RecipeDetailPageViewModel();
             BindingContext = VM;
         }
     }

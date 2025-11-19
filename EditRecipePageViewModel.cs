@@ -33,6 +33,11 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task SaveEdit()
         {
+            if(Draft == null)
+            {
+                WeakReferenceMessenger.Default.Send("There is no recipe to edit!");
+                return;
+            }
             if (!string.IsNullOrWhiteSpace(Draft.Name) && Draft.Ingredients.Count()>0 && !string.IsNullOrWhiteSpace(Draft.Description))
             {
                 EditedRecipe.Name = Draft.Name;

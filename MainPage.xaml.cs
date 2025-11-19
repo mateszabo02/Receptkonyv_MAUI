@@ -9,7 +9,6 @@ namespace Receptkonyv_MAUI
         public MainPage(MainPageViewModel VM)
         {
             InitializeComponent();
-            VM = new MainPageViewModel();
             BindingContext = VM;
         }
     }
