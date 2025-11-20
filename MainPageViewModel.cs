@@ -41,7 +41,14 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task AddRecipe()
         {
-            await Shell.Current.GoToAsync("recipeDetailPage");
+            var newRecipe = new Recipe { Name = "New Recipe", Description = "Description here" };
+            Recipes.Add(newRecipe);
+            var param = new ShellNavigationQueryParameters
+            {
+                { "Recipe", newRecipe }
+            };
+            await Shell.Current.GoToAsync("editRecipePage", param);
+            
         }
         [RelayCommand]
         public async Task FilterRecipe()

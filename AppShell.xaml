@@ -11,10 +11,6 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
     <ShellContent
-        Title="Recipe Details"
-        ContentTemplate="{DataTemplate local:RecipeDetailPage}"
-        Route="RecipePage" />
-    <ShellContent
         Title="Filter Recipes"
         ContentTemplate="{DataTemplate local:FilterPage}"
         Route="FilterPage"/>
