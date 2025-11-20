@@ -7,11 +7,11 @@
              Title="EditRecipePage">
     <VerticalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
         <Label Text="Name"/>
-        <Entry Text="{Binding EditedRecipe.Name}"/>
+        <Entry Text="{Binding Draft.Name}"/>
         <Label Text="Ingredients"/>
-        <Entry Text="{Binding EditedRecipe.Ingredients}"/>
+        <Entry Text="{Binding Draft.Ingredients}"/>
         <Label Text="Description"/>
-        <Entry Text="{Binding EditedRecipe.Description}"/>
+        <Entry Text="{Binding Draft.Description}"/>
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
             <Button Text="Cancel Edit" BackgroundColor="PaleGreen" Command="{Binding CancelEditCommand}"/>
             <Button Text="Save" BackgroundColor="LightSkyBlue" Command="{Binding SaveEditCommand}"/>

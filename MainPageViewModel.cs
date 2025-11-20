@@ -16,7 +16,6 @@ namespace Receptkonyv_MAUI
 
         [ObservableProperty]
         private Recipe selectedRecipe;
-
         public Recipe ViewedRecipe
         {
             set
@@ -30,10 +29,14 @@ namespace Receptkonyv_MAUI
             Recipes = new ObservableCollection<Recipe>();
             Recipes = new ObservableCollection<Recipe>
             {
-                new Recipe { Name = "Spaghetti Bolognese", Ingredients=new List<string>(){"Spaghetti", "Tomato sauce" },Description = "A classic Italian pasta dish with rich meat sauce." },
-                new Recipe { Name = "Chicken Curry",  Ingredients=new List<string>(){"Chicken", "Curry"},Description = "A flavorful curry dish with tender chicken pieces." },
-                new Recipe { Name = "Vegetable Stir Fry",  Ingredients=new List<string>(){"Vegetables", "Pasta"},Description = "A quick and healthy stir fry with fresh vegetables." }
+                new Recipe { Name = "Spaghetti Bolognese", /*Ingredients=new ObservableCollection<string><string>(){"Spaghetti", "Tomato sauce" },*/Description = "A classic Italian pasta dish with rich meat sauce." },
+                new Recipe { Name = "Chicken Curry",  /*Ingredients=new ObservableCollection<string><string>(){"Chicken", "Curry"},*/Description = "A flavorful curry dish with tender chicken pieces." },
+                new Recipe { Name = "Vegetable Stir Fry", /* Ingredients=new ObservableCollection<string><string>(){"Vegetables", "Pasta"},*/Description = "A quick and healthy stir fry with fresh vegetables." }
             };
+            WeakReferenceMessenger.Default.Register<DeleteRecipeMessage>(this, (r, m) =>
+            {
+                Recipes.Remove(m.Value);
+            });
         }
         [RelayCommand]
         public async Task AddRecipe()
@@ -63,5 +66,6 @@ namespace Receptkonyv_MAUI
             }
             SelectedRecipe = null;
         }
+        
     }
 }

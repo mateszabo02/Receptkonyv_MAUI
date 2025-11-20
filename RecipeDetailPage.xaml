@@ -7,15 +7,18 @@
              Title="RecipeDetailPage">
     <VerticalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
         <Label Text="Name"/>
-        <Label Text="{Binding ViewedRecipe.Name}"/>
+        <Label Text="{Binding Draft.Name}"/>
         <Label Text="Ingredients"/>
-        <Label Text="{Binding ViewedRecipe.Ingredients}"/>
+        <Label Text="{Binding Draft.Ingredients}"/>
         <Label Text="Description"/>
-        <Label Text="{Binding ViewedRecipe.Description}"/>
+        <Label Text="{Binding Draft.Description}"/>
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
             <Button Text="Edit" BackgroundColor="PaleGreen" Command="{Binding EditRecipeCommand}"/>
-            <Button Text="Delete" BackgroundColor="PaleVioletRed"/>
+            <Button Text="Delete" BackgroundColor="PaleVioletRed" Command="{Binding DeleteRecipeCommand}"/>
             <Button Text="Share" BackgroundColor="Aqua"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+            <Button Text="Back to List" BackgroundColor="LightGray" Command="{Binding BackToMainPageCommand}"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

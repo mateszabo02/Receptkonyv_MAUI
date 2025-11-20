@@ -23,33 +23,23 @@ namespace Receptkonyv_MAUI
         }
         public void InitDraft(Recipe value)
         {
-            if (value != null)
-                Draft = value.GetCopy();
-            else
-            {
-                Draft = new Recipe { Name = "---", Ingredients = new() { "-", "-" }, Description = "---" };
-            }
+            Draft = value.GetCopy();
         }
         [RelayCommand]
         public async Task SaveEdit()
         {
-            if(Draft == null)
+            if (!string.IsNullOrWhiteSpace(Draft.Name) && !string.IsNullOrWhiteSpace(Draft.Description) ){
+                var param = new ShellNavigationQueryParameters
             {
-                WeakReferenceMessenger.Default.Send("There is no recipe to edit!");
-                return;
+                { "editedRecipe", Draft }
+            };
+                await Shell.Current.GoToAsync("..", param);
             }
-            if (!string.IsNullOrWhiteSpace(Draft.Name) && Draft.Ingredients.Count()>0 && !string.IsNullOrWhiteSpace(Draft.Description))
-            {
-                EditedRecipe.Name = Draft.Name;
-                EditedRecipe.Ingredients = new List<string>(Draft.Ingredients);
-                EditedRecipe.Description = Draft.Description;
-                await Shell.Current.GoToAsync("..");
-            }   
             else
             {
-                WeakReferenceMessenger.Default.Send("There is an empty unit!");
+                WeakReferenceMessenger.Default.Send("All entries must have a value");
             }
-
+            
         }
         [RelayCommand]
         public Task CancelEdit()

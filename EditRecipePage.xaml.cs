@@ -8,10 +8,10 @@ public partial class EditRecipePage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = VM;
-        WeakReferenceMessenger.Default.Register<string>(this, (r, msg) =>
-        {
-            DisplayAlert("Warning", msg, "OK");
 
-        });
+		WeakReferenceMessenger.Default.Register<string>(this, async(r, m) =>
+		{
+			DisplayAlert("Error", m, "OK");
+		});
     }
 }
