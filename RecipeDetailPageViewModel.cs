@@ -30,7 +30,8 @@ namespace Receptkonyv_MAUI
             {
                 ViewedRecipe.Name = value.Name;
                 ViewedRecipe.Description = value.Description;
-                //ViewedRecipe.Ingredients = new System.Collections.ObjectModel.ObservableCollection<string>(value.Ingredients);
+                ViewedRecipe.Ingredients = value.Ingredients;
+                ViewedRecipe.ImageUrl = value.ImageUrl;
                 InitDraft(ViewedRecipe);
             }
         }
@@ -40,7 +41,7 @@ namespace Receptkonyv_MAUI
                 Draft = value.GetCopy();
             else
             {
-                Draft = new Recipe { Name = "---", Ingredients = new() { "-", "-" }, Description = "---" };
+                Draft = new Recipe { Name = "---", Ingredients = "---", Description = "---" };
             }
         }
         [RelayCommand]

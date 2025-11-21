@@ -4,21 +4,116 @@
              xmlns:local="clr-namespace:Receptkonyv_MAUI"
              x:Class="Receptkonyv_MAUI.RecipeDetailPage"
              x:DataType="local:RecipeDetailPageViewModel"
-             Title="RecipeDetailPage">
-    <VerticalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
-        <Label Text="Name"/>
-        <Label Text="{Binding Draft.Name}"/>
-        <Label Text="Ingredients"/>
-        <Label Text="{Binding Draft.Ingredients}"/>
-        <Label Text="Description"/>
-        <Label Text="{Binding Draft.Description}"/>
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-            <Button Text="Edit" BackgroundColor="PaleGreen" Command="{Binding EditRecipeCommand}"/>
-            <Button Text="Delete" BackgroundColor="PaleVioletRed" Command="{Binding DeleteRecipeCommand}"/>
-            <Button Text="Share" BackgroundColor="Aqua"/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-            <Button Text="Back to List" BackgroundColor="LightGray" Command="{Binding BackToMainPageCommand}"/>
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+             BackgroundColor="#FAFAFA"
+             Title="Recipe Details">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="18" Padding="20">
+
+            <!-- Név -->
+            <Border Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="14"
+                    BackgroundColor="White">
+                <VerticalStackLayout>
+                    <Label Text="Name"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="#6D4C41"/>
+                    <Label Text="{Binding Draft.Name}"
+                           FontSize="16"
+                           TextColor="#4E342E"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Hozzávalók -->
+            <Border Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="14"
+                    BackgroundColor="White">
+                <VerticalStackLayout>
+                    <Label Text="Ingredients"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="#6D4C41"/>
+                    <Label Text="{Binding Draft.Ingredients}"
+                           FontSize="16"
+                           TextColor="#4E342E"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Leírás -->
+            <Border Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="14"
+                    BackgroundColor="White">
+                <VerticalStackLayout>
+                    <Label Text="Description"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="#6D4C41"/>
+                    <Label Text="{Binding Draft.Description}"
+                           FontSize="16"
+                           TextColor="#4E342E"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Kép -->
+            <Border Padding="10"
+                    Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 20"
+                    BackgroundColor="White"
+                    HorizontalOptions="Center">
+                <Image Source="{Binding Draft.ImageUrl}"
+                       HeightRequest="220"
+                       WidthRequest="220"
+                       Aspect="AspectFill"
+                       Clip="RoundRectangle 18" />
+            </Border>
+
+            <!-- Akciók -->
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="14">
+
+                <Button Text="Edit"
+                        BackgroundColor="#81C784"
+                        TextColor="White"
+                        WidthRequest="110"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        FontAttributes="Bold"
+                        Command="{Binding EditRecipeCommand}"/>
+
+                <Button Text="Delete"
+                        BackgroundColor="#F48FB1"
+                        TextColor="White"
+                        WidthRequest="110"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        FontAttributes="Bold"
+                        Command="{Binding DeleteRecipeCommand}"/>
+
+                <Button Text="Share"
+                        BackgroundColor="#80DEEA"
+                        TextColor="White"
+                        WidthRequest="110"
+                        HeightRequest="46"
+                        CornerRadius="12"/>
+            </HorizontalStackLayout>
+
+            <!-- Vissza -->
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="10">
+                <Button Text="Back to List"
+                        BackgroundColor="#E0E0E0"
+                        TextColor="Black"
+                        WidthRequest="160"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        Command="{Binding BackToMainPageCommand}"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

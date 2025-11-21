@@ -4,17 +4,114 @@
              xmlns:local="clr-namespace:Receptkonyv_MAUI"
              x:Class="Receptkonyv_MAUI.EditRecipePage"
              x:DataType="local:EditRecipePageViewModel"
-             Title="EditRecipePage">
-    <VerticalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
-        <Label Text="Name"/>
-        <Entry Text="{Binding Draft.Name}"/>
-        <Label Text="Ingredients"/>
-        <Entry Text="{Binding Draft.Ingredients}"/>
-        <Label Text="Description"/>
-        <Entry Text="{Binding Draft.Description}"/>
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-            <Button Text="Cancel Edit" BackgroundColor="PaleGreen" Command="{Binding CancelEditCommand}"/>
-            <Button Text="Save" BackgroundColor="LightSkyBlue" Command="{Binding SaveEditCommand}"/>
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+             BackgroundColor="#FAFAFA"
+             Title="Edit Recipe">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="18" Padding="20">
+
+            <!-- Name -->
+            <Border Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="14"
+                    BackgroundColor="White">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Name"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="#6D4C41"/>
+                    <Entry Text="{Binding Draft.Name}"
+                           FontSize="16"
+                           TextColor="#4E342E"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Ingredients -->
+            <Border Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="14"
+                    BackgroundColor="White">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Ingredients"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="#6D4C41"/>
+                    <Entry Text="{Binding Draft.Ingredients}"
+                           FontSize="16"
+                           TextColor="#4E342E"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Description -->
+            <Border Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="14"
+                    BackgroundColor="White">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Description"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="#6D4C41"/>
+                    <Entry Text="{Binding Draft.Description}"
+                           FontSize="16"
+                           TextColor="#4E342E"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Image -->
+            <Border Padding="10"
+                    Stroke="#ECECEC"
+                    StrokeShape="RoundRectangle 20"
+                    BackgroundColor="White"
+                    HorizontalOptions="Center">
+                <Image Source="{Binding Draft.ImageUrl}"
+                       HeightRequest="220"
+                       WidthRequest="220"
+                       Aspect="AspectFill"
+                       Clip="RoundRectangle 18"/>
+            </Border>
+
+            <!-- Top buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="14">
+                <Button Text="Open an Image"
+                        BackgroundColor="#E0E0E0"
+                        TextColor="Black"
+                        WidthRequest="150"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        Command="{Binding OpenImageCommand}"/>
+
+                <Button Text="Take a Photo"
+                        BackgroundColor="#E0E0E0"
+                        TextColor="Black"
+                        WidthRequest="150"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        Command="{Binding TakePhotoCommand}"/>
+            </HorizontalStackLayout>
+
+            <!-- Bottom buttons -->
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="14">
+                <Button Text="Cancel Edit"
+                        BackgroundColor="#81C784"
+                        TextColor="White"
+                        WidthRequest="150"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        Command="{Binding CancelEditCommand}"/>
+
+                <Button Text="Save"
+                        BackgroundColor="#64B5F6"
+                        TextColor="White"
+                        WidthRequest="150"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        Command="{Binding SaveEditCommand}"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

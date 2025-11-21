@@ -20,10 +20,10 @@ namespace Receptkonyv_MAUI
         string description;
 
         [ObservableProperty]
-        ObservableCollection<string> ingredients;
+        string ingredients;
 
         [ObservableProperty]
-        string pictureUrl;
+        string imageUrl;
         public Recipe GetCopy()
         {
             return (Recipe)this.MemberwiseClone();
