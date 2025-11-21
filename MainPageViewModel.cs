@@ -39,7 +39,7 @@ namespace Receptkonyv_MAUI
             });
         }
         [RelayCommand]
-        public async Task AddRecipe()
+        public async Task AddRecipeAsync()
         {
             var newRecipe = new Recipe { Name = "New Recipe", Ingredients="Ingredients here" ,Description = "Description here" };
             Recipes.Add(newRecipe);
@@ -51,13 +51,13 @@ namespace Receptkonyv_MAUI
             
         }
         [RelayCommand]
-        public async Task FilterRecipe()
+        public async Task FilterRecipeAsync()
         {
             await Shell.Current.GoToAsync("filterPage");
         }
 
         [RelayCommand]
-        public async Task RecipeSelected()
+        public async Task RecipeSelectedAsync()
         {
             if (SelectedRecipe != null)
             {

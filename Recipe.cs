@@ -28,5 +28,9 @@ namespace Receptkonyv_MAUI
         {
             return (Recipe)this.MemberwiseClone();
         }
+        public override string ToString()
+        {
+            return $"Name: {Name}\nIngredients: {Ingredients}\nDescription: {Description}";
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Receptkonyv_MAUI
             Draft = value.GetCopy();
         }
         [RelayCommand]
-        public async Task SaveEdit()
+        public async Task SaveEditAsync()
         {
             if (!string.IsNullOrWhiteSpace(Draft.Name) && !string.IsNullOrWhiteSpace(Draft.Description) && !string.IsNullOrWhiteSpace(Draft.Ingredients)){
                 var param = new ShellNavigationQueryParameters

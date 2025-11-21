@@ -98,7 +98,8 @@
                         TextColor="White"
                         WidthRequest="110"
                         HeightRequest="46"
-                        CornerRadius="12"/>
+                        CornerRadius="12"
+                        Command="{Binding ShareRecipeCommand}"/>
             </HorizontalStackLayout>
 
             <!-- Vissza -->

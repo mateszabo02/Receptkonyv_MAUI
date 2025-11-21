@@ -59,7 +59,7 @@
                                 <Label Text="{Binding Name}"
                                     FontAttributes="Bold"
                                     FontSize="18"
-                                    TextColor="#5D4037"/>
+                                    TextColor="Black"/>
 
                             </VerticalStackLayout>
 

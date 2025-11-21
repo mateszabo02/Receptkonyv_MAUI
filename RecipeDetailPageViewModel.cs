@@ -45,7 +45,7 @@ namespace Receptkonyv_MAUI
             }
         }
         [RelayCommand]
-        public async Task EditRecipe()
+        public async Task EditRecipeAsync()
         {
             var param = new ShellNavigationQueryParameters
             {
@@ -55,15 +55,33 @@ namespace Receptkonyv_MAUI
 
         }
         [RelayCommand]
-        public async Task BackToMainPage()
+        public async Task BackToMainPageAsync()
         {
             await Shell.Current.GoToAsync("..");
         }
         [RelayCommand]
-        public async Task DeleteRecipe()
+        public async Task DeleteRecipeAsync()
         {
             WeakReferenceMessenger.Default.Send(new DeleteRecipeMessage(ViewedRecipe));
             await Shell.Current.GoToAsync("..");
+        }
+        [RelayCommand]
+        public async Task ShareRecipeAsync()
+        {
+            if(ViewedRecipe == null)
+                return;
+            if(Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+            {
+                await Share.Default.RequestAsync(new ShareTextRequest
+                {
+                    Title = "Share Recipe",
+                    Text = ViewedRecipe.ToString()
+                });
+            }
+            else
+            {
+                WeakReferenceMessenger.Default.Send("No internet access.");
+            }
         }
     }
     public class DeleteRecipeMessage : ValueChangedMessage<Recipe>
