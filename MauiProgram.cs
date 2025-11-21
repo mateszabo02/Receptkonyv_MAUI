@@ -20,6 +20,8 @@ namespace Receptkonyv_MAUI
             builder.Services.AddTransient<RecipeDetailPageViewModel>();
             builder.Services.AddTransient<EditRecipePage>();
             builder.Services.AddTransient<EditRecipePageViewModel>();
+            builder.Services.AddTransient<FilterPage>();
+            builder.Services.AddTransient<FilterPageViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

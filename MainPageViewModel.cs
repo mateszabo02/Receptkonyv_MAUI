@@ -13,9 +13,10 @@ namespace Receptkonyv_MAUI
     public partial class MainPageViewModel : ObservableObject
     {
         public ObservableCollection<Recipe> Recipes { get; set; }
-
         [ObservableProperty]
         private Recipe selectedRecipe;
+        [ObservableProperty]
+        string filterTerm;
         public Recipe ViewedRecipe
         {
             set
@@ -53,7 +54,11 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task FilterRecipeAsync()
         {
-            await Shell.Current.GoToAsync("filterPage");
+            var param = new ShellNavigationQueryParameters
+            {
+                { "AllRecipes", Recipes }
+            };
+            await Shell.Current.GoToAsync("filterPage", param);
         }
 
         [RelayCommand]

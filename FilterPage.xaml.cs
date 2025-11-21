@@ -2,8 +2,10 @@ namespace Receptkonyv_MAUI;
 
 public partial class FilterPage : ContentPage
 {
-	public FilterPage()
+	public FilterPage(FilterPageViewModel VM)
 	{
-		InitializeComponent();
+        InitializeComponent();
+        BindingContext = VM;
+
 	}
 }
