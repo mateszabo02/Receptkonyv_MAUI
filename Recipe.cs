@@ -26,6 +26,7 @@ namespace Receptkonyv_MAUI
         string imageUrl;
         public Recipe GetCopy()
         {
+            Id=this.Id;
             return (Recipe)this.MemberwiseClone();
         }
         public override string ToString()

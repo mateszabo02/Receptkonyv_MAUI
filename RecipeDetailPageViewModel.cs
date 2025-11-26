@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Receptkonyv_MAUI
 {
     [QueryProperty(nameof(ViewedRecipe), "Recipe")]
-    [QueryProperty(nameof(EditedRecipe), "editedRecipe")]
+    [QueryProperty(nameof(EditedRecipe), "EditedRecipe")]
     public partial class RecipeDetailPageViewModel : ObservableObject
     {
         [ObservableProperty]

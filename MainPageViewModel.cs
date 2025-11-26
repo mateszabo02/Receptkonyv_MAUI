@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Receptkonyv_MAUI
 {
+    [QueryProperty(nameof(EditedRecipe), "EditedRecipe")]
     public partial class MainPageViewModel : ObservableObject
     {
         public ObservableCollection<Recipe> Recipes { get; set; }
@@ -22,6 +23,21 @@ namespace Receptkonyv_MAUI
             set
             {
                 ViewedRecipe = SelectedRecipe;
+            }
+        }
+        public Recipe EditedRecipe
+        {
+            set
+            {
+                if(value!= null)
+                {
+                    if(SelectedRecipe != null)
+                    {
+                        Recipes.Remove(SelectedRecipe);
+                        SelectedRecipe = null;
+                    }
+                    Recipes.Add(value);
+                }
             }
         }
 
@@ -42,14 +58,14 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task AddRecipeAsync()
         {
-            var newRecipe = new Recipe { Name = "New Recipe", Ingredients="Ingredients here" ,Description = "Description here" };
-            Recipes.Add(newRecipe);
+            SelectedRecipe = null;
+
             var param = new ShellNavigationQueryParameters
             {
-                { "Recipe", newRecipe }
+                { "Recipe", new Recipe() }
             };
             await Shell.Current.GoToAsync("editRecipePage", param);
-            
+
         }
         [RelayCommand]
         public async Task FilterRecipeAsync()

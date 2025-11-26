@@ -31,7 +31,7 @@ namespace Receptkonyv_MAUI
             if (!string.IsNullOrWhiteSpace(Draft.Name) && !string.IsNullOrWhiteSpace(Draft.Description) && !string.IsNullOrWhiteSpace(Draft.Ingredients)){
                 var param = new ShellNavigationQueryParameters
             {
-                { "editedRecipe", Draft }
+                { "EditedRecipe", Draft }
             };
                 await Shell.Current.GoToAsync("..", param);
             }
