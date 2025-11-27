@@ -4,152 +4,114 @@
              xmlns:local="clr-namespace:Receptkonyv_MAUI"
              x:Class="Receptkonyv_MAUI.EditRecipePage"
              x:DataType="local:EditRecipePageViewModel"
-             BackgroundColor="#FAFAFA"
+             BackgroundColor="#F7F9FC"
              Title="Edit Recipe">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="18" Padding="20">
+        <VerticalStackLayout Spacing="20" Padding="20">
 
-            <!-- Name -->
-            <Border Stroke="#ECECEC"
-                    StrokeShape="RoundRectangle 16"
-                    Padding="14"
-                    BackgroundColor="White">
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="Name"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           TextColor="#6D4C41"/>
-                    <Entry Text="{Binding Draft.Name}"
-                           FontSize="16"
-                           TextColor="#4E342E"/>
-                </VerticalStackLayout>
+            <Border StrokeShape="RoundRectangle 20" StrokeThickness="0"
+                    HeightRequest="250" HorizontalOptions="Fill" BackgroundColor="White">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Offset="0,5" Radius="10" Opacity="0.1"/>
+                </Border.Shadow>
+                <Grid>
+                    <Label Text="📷 Image Placeholder" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#B0BEC5"/>
+                    <Image Source="{Binding Draft.ImageUrl}" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                </Grid>
             </Border>
 
-            <!-- Ingredients -->
-            <Border Stroke="#ECECEC"
-                    StrokeShape="RoundRectangle 16"
-                    Padding="14"
-                    BackgroundColor="White">
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="Ingredients"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           TextColor="#6D4C41"/>
-                    <VerticalStackLayout>
-                        <CollectionView ItemsSource="{Binding Draft.Ingredients}" 
-                SelectionMode="None" 
-                HeightRequest="200">
-                            <CollectionView.ItemTemplate>
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" StrokeThickness="0" Padding="0">
+                <Border.Shadow>
+                    <Shadow Brush="#FF7043" Offset="0,2" Radius="6" Opacity="0.1"/>
+                </Border.Shadow>
+                <Grid ColumnDefinitions="6, *">
+                    <BoxView Grid.Column="0" Color="#FF7043"/>
+                    <VerticalStackLayout Grid.Column="1" Padding="15" Spacing="5">
+                        <Label Text="Recipe Name" FontSize="12" TextColor="#FF7043" FontAttributes="Bold" TextTransform="Uppercase"/>
+                        <Entry Text="{Binding Draft.Name}" FontSize="18" TextColor="#263238" Placeholder="e.g. Chili Con Carne" Margin="-5,0,0,0"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" StrokeThickness="0" Padding="0">
+                <Border.Shadow>
+                    <Shadow Brush="#66BB6A" Offset="0,2" Radius="6" Opacity="0.1"/>
+                </Border.Shadow>
+                <Grid ColumnDefinitions="6, *">
+                    <BoxView Grid.Column="0" Color="#66BB6A"/>
+                    <VerticalStackLayout Grid.Column="1" Padding="15" Spacing="10">
+                        <Label Text="🛒 Ingredients" FontSize="14" TextColor="#66BB6A" FontAttributes="Bold" TextTransform="Uppercase"/>
+
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Draft.Ingredients}" Spacing="8">
+                            <BindableLayout.ItemTemplate>
                                 <DataTemplate x:DataType="local:Ingredient">
-                                    <Border Padding="10, 5" Margin="0, 4" BackgroundColor="#ECECEC" StrokeShape="RoundRectangle 8" StrokeThickness="0">
+                                    <Border BackgroundColor="#F1F8E9" StrokeShape="RoundRectangle 10" StrokeThickness="0" Padding="5,2">
                                         <Grid ColumnDefinitions="*, auto">
-
-                                            <Entry Grid.Column="0" 
-                           Text="{Binding Name}" 
-                           Placeholder="Ingredients name..."
-                           FontSize="16" 
-                           TextColor="#4E342E" 
-                           VerticalOptions="Center"/>
-
-                                            <Button Text="X" 
-                            Grid.Column="1" 
-                            WidthRequest="30" 
-                            HeightRequest="30" 
-                            BackgroundColor="#E57373" 
-                            TextColor="White" 
-                            FontAttributes="Bold"
-                            CornerRadius="15"
-                            Padding="0"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:EditRecipePage}}, Path=BindingContext.RemoveIngredientCommand}"
-                            CommandParameter="{Binding .}"/>
+                                            <Entry Grid.Column="0" Text="{Binding Name}" Placeholder="Ingredient..." FontSize="16" TextColor="#37474F" VerticalOptions="Center"/>
+                                            <Button Grid.Column="1" Text="✖" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" TextColor="#EF5350" FontSize="18"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:EditRecipePage}}, Path=BindingContext.RemoveIngredientCommand}"
+                                                    CommandParameter="{Binding .}"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Button Text="+"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:EditRecipePage}}, Path=BindingContext.AddIngredientCommand}"
-                                                CommandParameter="{Binding .}"
-                                                WidthRequest="24" 
-                                                HeightRequest="24" 
-                                                BackgroundColor="#81C784" 
-                                                TextColor="White" 
-                                                FontAttributes="Bold"
-                                                CornerRadius="12"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="Center"/>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                        <Button Text="➕ Add Ingredient" Command="{Binding AddIngredientCommand}"
+                                BackgroundColor="#E8F5E9" TextColor="#66BB6A" FontAttributes="Bold" CornerRadius="10" HorizontalOptions="Start"/>
                     </VerticalStackLayout>
-                </VerticalStackLayout>
+                </Grid>
             </Border>
 
-            <!-- Description -->
-            <Border Stroke="#ECECEC"
-                    StrokeShape="RoundRectangle 16"
-                    Padding="14"
-                    BackgroundColor="White">
-                <VerticalStackLayout Spacing="6">
-                    <Label Text="Description"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           TextColor="#6D4C41"/>
-                    <Entry Text="{Binding Draft.Description}"
-                           FontSize="16"
-                           TextColor="#4E342E"/>
-                </VerticalStackLayout>
+            <Border BackgroundColor="White" StrokeShape="RoundRectangle 16" StrokeThickness="0" Padding="0">
+                <Border.Shadow>
+                    <Shadow Brush="#42A5F5" Offset="0,2" Radius="6" Opacity="0.1"/>
+                </Border.Shadow>
+                <Grid ColumnDefinitions="6, *">
+                    <BoxView Grid.Column="0" Color="#42A5F5"/>
+                    <VerticalStackLayout Grid.Column="1" Padding="15" Spacing="5">
+                        <Label Text="📝 Instructions" FontSize="14" TextColor="#42A5F5" FontAttributes="Bold" TextTransform="Uppercase"/>
+                        <Editor Text="{Binding Draft.Description}" FontSize="16" TextColor="#37474F" Placeholder="Describe the steps..." AutoSize="TextChanges" Margin="-5,0,0,0"/>
+                    </VerticalStackLayout>
+                </Grid>
             </Border>
 
-            <!-- Image -->
-            <Border Padding="10"
-                    Stroke="#ECECEC"
-                    StrokeShape="RoundRectangle 20"
-                    BackgroundColor="White"
-                    HorizontalOptions="Center">
-                <Image Source="{Binding Draft.ImageUrl}"
-                       HeightRequest="220"
-                       WidthRequest="220"
-                       Aspect="AspectFill"
-                       Clip="RoundRectangle 18"/>
-            </Border>
+            <VerticalStackLayout Spacing="15">
 
-            <!-- Top buttons -->
-            <HorizontalStackLayout HorizontalOptions="Center"
-                                   Spacing="14">
-                <Button Text="Open an Image"
-                        BackgroundColor="#E0E0E0"
-                        TextColor="Black"
-                        WidthRequest="150"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        Command="{Binding OpenImageCommand}"/>
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                    <Button Grid.Column="0" Text="📂 Gallery" Command="{Binding OpenImageCommand}" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#78909C" Offset="0.0" />
+                                <GradientStop Color="#546E7A" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Grid.Column="1" Text="📸 Camera" Command="{Binding TakePhotoCommand}" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#78909C" Offset="0.0" />
+                                <GradientStop Color="#546E7A" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </Grid>
 
-                <Button Text="Take a Photo"
-                        BackgroundColor="#E0E0E0"
-                        TextColor="Black"
-                        WidthRequest="150"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        Command="{Binding TakePhotoCommand}"/>
-            </HorizontalStackLayout>
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                    <Button Grid.Column="0" Text="❌ Cancel" Command="{Binding CancelEditCommand}" TextColor="#EF5350" BackgroundColor="#FFEBEE" FontAttributes="Bold" CornerRadius="12" HeightRequest="50" BorderColor="#FFCDD2" BorderWidth="1"/>
 
-            <!-- Bottom buttons -->
-            <HorizontalStackLayout HorizontalOptions="Center"
-                                   Spacing="14">
-                <Button Text="Cancel Edit"
-                        BackgroundColor="#81C784"
-                        TextColor="White"
-                        WidthRequest="150"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        Command="{Binding CancelEditCommand}"/>
+                    <Button Grid.Column="1" Text="💾 Save" Command="{Binding SaveEditCommand}" TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#42A5F5" Offset="0.0" />
+                                <GradientStop Color="#1E88E5" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </Grid>
 
-                <Button Text="Save"
-                        BackgroundColor="#64B5F6"
-                        TextColor="White"
-                        WidthRequest="150"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        Command="{Binding SaveEditCommand}"/>
-            </HorizontalStackLayout>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

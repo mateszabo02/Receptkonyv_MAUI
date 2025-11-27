@@ -4,143 +4,144 @@
              xmlns:local="clr-namespace:Receptkonyv_MAUI"
              x:Class="Receptkonyv_MAUI.RecipeDetailPage"
              x:DataType="local:RecipeDetailPageViewModel"
-             BackgroundColor="#FAFAFA"
+             BackgroundColor="#F7F9FC"
              Title="Recipe Details">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="18" Padding="20">
+        <VerticalStackLayout Spacing="20" Padding="20">
 
-            <!-- Név -->
-            <Border Stroke="#ECECEC"
-                    StrokeShape="RoundRectangle 16"
-                    Padding="14"
+            <Border StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0"
+                    HeightRequest="250"
+                    HorizontalOptions="Fill"
                     BackgroundColor="White">
-                <VerticalStackLayout>
-                    <Label Text="Name"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           TextColor="#6D4C41"/>
-                    <Label Text="{Binding Draft.Name}"
-                           FontSize="16"
-                           TextColor="#4E342E"/>
-                </VerticalStackLayout>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Offset="0,5" Radius="10" Opacity="0.1"/>
+                </Border.Shadow>
+
+                <Grid>
+                    <Label Text="🍲 No image found" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" 
+                           TextColor="#B0BEC5"/>
+
+                    <Image Source="{Binding Draft.ImageUrl}"
+                           Aspect="AspectFill"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Fill"/>
+                </Grid>
             </Border>
 
-            <!-- Hozzávalók -->
-            <Border Stroke="#ECECEC"
+            <Border BackgroundColor="White"
                     StrokeShape="RoundRectangle 16"
-                    Padding="14"
-                    BackgroundColor="White">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Ingredients"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           TextColor="#6D4C41"/>
+                    StrokeThickness="0"
+                    Padding="0">
+                <Border.Shadow>
+                    <Shadow Brush="#FF7043" Offset="0,2" Radius="6" Opacity="0.1"/>
+                </Border.Shadow>
 
-                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Draft.Ingredients}"
-                                         Spacing="6">
-
-                        <BindableLayout.EmptyView>
-                            <Label Text="There are no ingredients" TextColor="Gray" FontAttributes="Italic"/>
-                        </BindableLayout.EmptyView>
-
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="local:Ingredient">
-                                <Border Padding="10, 5" 
-                                        BackgroundColor="#ECECEC" 
-                                        StrokeShape="RoundRectangle 8"
-                                        StrokeThickness="0">
-                                    <Grid ColumnDefinitions="30, *">
-                                        <Label Grid.Column="0" 
-                                               Text="•" 
-                                               FontSize="20"
-                                               TextColor="#6D4C41" 
-                                               VerticalOptions="Center"
-                                               HorizontalOptions="Center"/>
-
-                                        <Label Grid.Column="1" 
-                                               Text="{Binding Name}" 
-                                               FontSize="16" 
-                                               TextColor="#4E342E" 
-                                               VerticalOptions="Center"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
+                <Grid ColumnDefinitions="6, *">
+                    <BoxView Grid.Column="0" Color="#FF7043"/>
+                    <VerticalStackLayout Grid.Column="1" Padding="15">
+                        <Label Text="Recipe Name" FontSize="12" TextColor="#FF7043" FontAttributes="Bold" TextTransform="Uppercase"/>
+                        <Label Text="{Binding Draft.Name}" FontSize="22" TextColor="#263238" FontAttributes="Bold"/>
                     </VerticalStackLayout>
-                </VerticalStackLayout>
+                </Grid>
             </Border>
-            <!-- Leírás -->
-            <Border Stroke="#ECECEC"
+
+            <Border BackgroundColor="White"
                     StrokeShape="RoundRectangle 16"
-                    Padding="14"
-                    BackgroundColor="White">
-                <VerticalStackLayout>
-                    <Label Text="Description"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           TextColor="#6D4C41"/>
-                    <Label Text="{Binding Draft.Description}"
-                           FontSize="16"
-                           TextColor="#4E342E"/>
-                </VerticalStackLayout>
+                    StrokeThickness="0"
+                    Padding="0">
+                <Border.Shadow>
+                    <Shadow Brush="#66BB6A" Offset="0,2" Radius="6" Opacity="0.1"/>
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="6, *">
+                    <BoxView Grid.Column="0" Color="#66BB6A"/>
+
+                    <VerticalStackLayout Grid.Column="1" Padding="15" Spacing="10">
+                        <Label Text="🛒 Ingredients" FontSize="14" TextColor="#66BB6A" FontAttributes="Bold" TextTransform="Uppercase"/>
+
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Draft.Ingredients}"
+                                             Spacing="6">
+
+                            <BindableLayout.EmptyView>
+                                <Label Text="There are no ingredients" TextColor="Gray"/>
+                            </BindableLayout.EmptyView>
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="local:Ingredient">
+                                    <Border BackgroundColor="#F1F8E9" StrokeShape="RoundRectangle 8" StrokeThickness="0" Padding="10,8">
+                                        <Grid ColumnDefinitions="25, *">
+                                            <Label Grid.Column="0" Text="✔" TextColor="#66BB6A" FontAttributes="Bold"/>
+                                            <Label Grid.Column="1" Text="{Binding Name}" TextColor="#37474F"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
             </Border>
 
-            <!-- Kép -->
-            <Border Padding="10"
-                    Stroke="#ECECEC"
-                    StrokeShape="RoundRectangle 20"
-                    BackgroundColor="White"
-                    HorizontalOptions="Center">
-                <Image Source="{Binding Draft.ImageUrl}"
-                       HeightRequest="220"
-                       WidthRequest="220"
-                       Aspect="AspectFill"
-                       Clip="RoundRectangle 18" />
+            <Border BackgroundColor="White"
+                    StrokeShape="RoundRectangle 16"
+                    StrokeThickness="0"
+                    Padding="0">
+                <Border.Shadow>
+                    <Shadow Brush="#42A5F5" Offset="0,2" Radius="6" Opacity="0.1"/>
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="6, *">
+                    <BoxView Grid.Column="0" Color="#42A5F5"/>
+
+                    <VerticalStackLayout Grid.Column="1" Padding="15">
+                        <Label Text="📝 Description" FontSize="14" TextColor="#42A5F5" FontAttributes="Bold" TextTransform="Uppercase"/>
+                        <Label Text="{Binding Draft.Description}" FontSize="16" TextColor="#37474F" LineHeight="1.2"/>
+                    </VerticalStackLayout>
+                </Grid>
             </Border>
 
-            <!-- Akciók -->
-            <HorizontalStackLayout HorizontalOptions="Center"
-                                   Spacing="14">
+            <VerticalStackLayout Spacing="15">
 
-                <Button Text="Edit"
-                        BackgroundColor="#81C784"
-                        TextColor="White"
-                        WidthRequest="110"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        FontAttributes="Bold"
-                        Command="{Binding EditRecipeCommand}"/>
+                <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
+                    <Button Grid.Column="0" Text="✏️ Edit" Command="{Binding EditRecipeCommand}"
+                            TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#66BB6A" Offset="0.0" />
+                                <GradientStop Color="#43A047" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
 
-                <Button Text="Delete"
-                        BackgroundColor="#F48FB1"
-                        TextColor="White"
-                        WidthRequest="110"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        FontAttributes="Bold"
-                        Command="{Binding DeleteRecipeCommand}"/>
+                    <Button Grid.Column="1" Text="📤 Share" Command="{Binding ShareRecipeCommand}"
+                            TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#42A5F5" Offset="0.0" />
+                                <GradientStop Color="#1E88E5" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
 
-                <Button Text="Share"
-                        BackgroundColor="#80DEEA"
-                        TextColor="White"
-                        WidthRequest="110"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        Command="{Binding ShareRecipeCommand}"/>
-            </HorizontalStackLayout>
+                    <Button Grid.Column="2" Text="🗑️ Del" Command="{Binding DeleteRecipeCommand}"
+                            TextColor="White" FontAttributes="Bold" CornerRadius="12" HeightRequest="50">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#EF5350" Offset="0.0" />
+                                <GradientStop Color="#D32F2F" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </Grid>
 
-            <!-- Vissza -->
-            <HorizontalStackLayout HorizontalOptions="Center"
-                                   Spacing="10">
-                <Button Text="Back to List"
-                        BackgroundColor="#E0E0E0"
-                        TextColor="Black"
-                        WidthRequest="160"
-                        HeightRequest="46"
-                        CornerRadius="12"
-                        Command="{Binding BackToMainPageCommand}"/>
-            </HorizontalStackLayout>
+                <Button Text="Back to List" Command="{Binding BackToMainPageCommand}"
+                        BackgroundColor="White" TextColor="#78909C" 
+                        BorderColor="#CFD8DC" BorderWidth="1"
+                        FontAttributes="Bold" CornerRadius="12" HeightRequest="50"/>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -4,72 +4,119 @@
              xmlns:local="clr-namespace:Receptkonyv_MAUI"
              x:DataType="local:MainPageViewModel"
              x:Class="Receptkonyv_MAUI.MainPage"
-             BackgroundColor="#FAFAFA">
+             BackgroundColor="#F7F9FC"
+             Title="Recipes">
 
-    <Grid RowDefinitions="Auto, *" RowSpacing="16" Padding="20, 20">
+    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="20">
 
-        <!-- Gombok szekció -->
-        <HorizontalStackLayout HorizontalOptions="Center">
-            <VerticalStackLayout Spacing="12" VerticalOptions="Center">
-                <Button Text="Add Recipe"
-                        WidthRequest="180"
-                        HeightRequest="48"
-                        CornerRadius="12"
-                        BackgroundColor="#FF8A65"
+        <VerticalStackLayout Grid.Row="0" Spacing="15">
+            <Label Text="👨‍🍳 My Recipes" 
+                   FontSize="28" 
+                   FontAttributes="Bold" 
+                   TextColor="#1A237E"/>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+
+                <Button Grid.Column="0"
+                        Text="➕ New Recipe"
+                        Command="{Binding AddRecipeCommand}"
                         TextColor="White"
                         FontAttributes="Bold"
-                        Command="{Binding AddRecipeCommand}"/>
+                        CornerRadius="16"
+                        HeightRequest="55"
+                        FontSize="15"
+                        Shadow="0,5,10,0.3,#FF7043">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#FF8A65" Offset="0.0" />
+                            <GradientStop Color="#FF5252" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
 
-                <Button Text="Filter Recipes"
-                        WidthRequest="180"
-                        HeightRequest="48"
-                        CornerRadius="12"
-                        BackgroundColor="#4DB6AC"
+                <Button Grid.Column="1"
+                        Text="🔍 Filter"
+                        Command="{Binding FilterRecipeCommand}"
                         TextColor="White"
                         FontAttributes="Bold"
-                        Command="{Binding FilterRecipeCommand}"/>
-            </VerticalStackLayout>
-        </HorizontalStackLayout>
+                        CornerRadius="16"
+                        HeightRequest="55"
+                        FontSize="15"
+                        Shadow="0,5,10,0.3,#5C6BC0">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#7986CB" Offset="0.0" />
+                            <GradientStop Color="#3949AB" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </VerticalStackLayout>
 
-        <!-- Lista -->
-        <Border Grid.Row="1"
-                Stroke="#ECECEC"
-                BackgroundColor="White"
-                StrokeShape="RoundRectangle 20"
-                Padding="10">
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Recipes}"
+                        SelectedItem="{Binding SelectedRecipe}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding RecipeSelectedCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedRecipe}">
 
-            <CollectionView ItemsSource="{Binding Recipes}"
-                            SelectedItem="{Binding SelectedRecipe}"
-                            SelectionMode="Single"
-                            SelectionChangedCommand="{Binding RecipeSelectedCommand}"
-                            SelectionChangedCommandParameter="{Binding SelectedRecipe}"
-                            BackgroundColor="Transparent">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                    <Label Text="🥗" FontSize="50"/>
+                    <Label Text="There are no recipes." TextColor="#90A4AE"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="local:Recipe">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:Recipe">
 
-                        <Border Margin="8"
-                                Padding="14"
-                                BackgroundColor="#FFFDE7"
-                                Stroke="#F0E4B8"
-                                StrokeShape="RoundRectangle 16"
-                                Shadow="5,5,10,0.3">
+                    <Border Margin="0,0,0,14"
+                            Padding="0"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 18"
+                            StrokeThickness="0">
 
-                            <VerticalStackLayout>
+                        <Border.Shadow>
+                            <Shadow Brush="#90A4AE" Offset="2,4" Radius="8" Opacity="0.2"/>
+                        </Border.Shadow>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#E0F7FA" />
+                                        <Setter Property="Stroke" Value="#00BCD4" />
+                                        <Setter Property="StrokeThickness" Value="2" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid ColumnDefinitions="8, *" Padding="0">
+
+                            <BoxView Grid.Column="0" 
+                                     Color="#26A69A" 
+                                     VerticalOptions="Fill"/>
+
+                            <VerticalStackLayout Grid.Column="1" Padding="15,12">
                                 <Label Text="{Binding Name}"
-                                    FontAttributes="Bold"
-                                    FontSize="18"
-                                    TextColor="Black"/>
-
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="#37474F"/>
                             </VerticalStackLayout>
 
-                        </Border>
+                            <Label Grid.Column="1" Text="👉" 
+                                   HorizontalOptions="End" 
+                                   VerticalOptions="Center" 
+                                   Margin="0,0,15,0"
+                                   TextColor="#CFD8DC"/>
+                        </Grid>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-
-            </CollectionView>
-        </Border>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </Grid>
 
