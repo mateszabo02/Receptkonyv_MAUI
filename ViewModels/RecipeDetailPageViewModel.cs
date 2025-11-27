@@ -73,7 +73,8 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task ShareRecipeAsync()
         {
-            if(ViewedRecipe == null)
+            ViewedRecipe.UpdateStrings();
+            if (ViewedRecipe == null)
                 return;
             if(Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
             {
