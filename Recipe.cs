@@ -20,7 +20,10 @@ namespace Receptkonyv_MAUI
         string description;
 
         [ObservableProperty]
-        string ingredients;
+        private ObservableCollection<Ingredient> ingredients = new();
+
+        [ObservableProperty]
+        string ingredientsString;
 
         [ObservableProperty]
         string imageUrl;
@@ -29,9 +32,17 @@ namespace Receptkonyv_MAUI
             Id=this.Id;
             return (Recipe)this.MemberwiseClone();
         }
+        public void UpdateStrings()
+        {
+            IngredientsString = "";
+            foreach(var i in Ingredients)
+            {
+                IngredientsString += i.ToString() + ", ";
+            }
+        }
         public override string ToString()
         {
-            return $"Name: {Name}\nIngredients: {Ingredients}\nDescription: {Description}";
+            return $"Name: {Name}\nIngredients: {IngredientsString}\nDescription: {Description}";
         }
     }
 }

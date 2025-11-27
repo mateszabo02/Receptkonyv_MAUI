@@ -36,9 +36,49 @@
                            FontAttributes="Bold"
                            FontSize="18"
                            TextColor="#6D4C41"/>
-                    <Entry Text="{Binding Draft.Ingredients}"
-                           FontSize="16"
-                           TextColor="#4E342E"/>
+                    <VerticalStackLayout>
+                        <CollectionView ItemsSource="{Binding Draft.Ingredients}" 
+                SelectionMode="None" 
+                HeightRequest="200">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local:Ingredient">
+                                    <Border Padding="10, 5" Margin="0, 4" BackgroundColor="#ECECEC" StrokeShape="RoundRectangle 8" StrokeThickness="0">
+                                        <Grid ColumnDefinitions="*, auto">
+
+                                            <Entry Grid.Column="0" 
+                           Text="{Binding Name}" 
+                           Placeholder="Ingredients name..."
+                           FontSize="16" 
+                           TextColor="#4E342E" 
+                           VerticalOptions="Center"/>
+
+                                            <Button Text="X" 
+                            Grid.Column="1" 
+                            WidthRequest="30" 
+                            HeightRequest="30" 
+                            BackgroundColor="#E57373" 
+                            TextColor="White" 
+                            FontAttributes="Bold"
+                            CornerRadius="15"
+                            Padding="0"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:EditRecipePage}}, Path=BindingContext.RemoveIngredientCommand}"
+                            CommandParameter="{Binding .}"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button Text="+"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:EditRecipePage}}, Path=BindingContext.AddIngredientCommand}"
+                                                CommandParameter="{Binding .}"
+                                                WidthRequest="24" 
+                                                HeightRequest="24" 
+                                                BackgroundColor="#81C784" 
+                                                TextColor="White" 
+                                                FontAttributes="Bold"
+                                                CornerRadius="12"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="Center"/>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>
 

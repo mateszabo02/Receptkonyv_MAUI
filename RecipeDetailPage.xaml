@@ -31,17 +31,45 @@
                     StrokeShape="RoundRectangle 16"
                     Padding="14"
                     BackgroundColor="White">
-                <VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
                     <Label Text="Ingredients"
                            FontAttributes="Bold"
                            FontSize="18"
                            TextColor="#6D4C41"/>
-                    <Label Text="{Binding Draft.Ingredients}"
-                           FontSize="16"
-                           TextColor="#4E342E"/>
+
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Draft.Ingredients}"
+                                         Spacing="6">
+
+                        <BindableLayout.EmptyView>
+                            <Label Text="There are no ingredients" TextColor="Gray" FontAttributes="Italic"/>
+                        </BindableLayout.EmptyView>
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="local:Ingredient">
+                                <Border Padding="10, 5" 
+                                        BackgroundColor="#ECECEC" 
+                                        StrokeShape="RoundRectangle 8"
+                                        StrokeThickness="0">
+                                    <Grid ColumnDefinitions="30, *">
+                                        <Label Grid.Column="0" 
+                                               Text="•" 
+                                               FontSize="20"
+                                               TextColor="#6D4C41" 
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding Name}" 
+                                               FontSize="16" 
+                                               TextColor="#4E342E" 
+                                               VerticalOptions="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
                 </VerticalStackLayout>
             </Border>
-
             <!-- Leírás -->
             <Border Stroke="#ECECEC"
                     StrokeShape="RoundRectangle 16"

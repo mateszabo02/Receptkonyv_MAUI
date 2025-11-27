@@ -28,6 +28,10 @@ namespace Receptkonyv_MAUI
                 {
                     source = new List<Recipe>(value);
                     FilteredRecipes = new ObservableCollection<Recipe>(source);
+                    foreach(var i in FilteredRecipes)
+                    {
+                        i.UpdateStrings();
+                    }
                 }
             }
         }
@@ -59,7 +63,7 @@ namespace Receptkonyv_MAUI
             List<Recipe> filtered = new();
             foreach (var recipe in source)
             {
-                if (recipe.Ingredients != null && recipe.Ingredients.ToLower().Contains(term))
+                if (recipe.Ingredients != null && recipe.Ingredients.Any(i=>i.Name.ToLower().Contains(term)))
                 {
                     filtered.Add(recipe);
                 }

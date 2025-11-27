@@ -22,6 +22,7 @@ namespace Receptkonyv_MAUI
         Recipe editedRecipe;
         partial void OnViewedRecipeChanged(Recipe value)
         {
+
             InitDraft(value);
         }
         partial void OnEditedRecipeChanged(Recipe value)
@@ -32,16 +33,20 @@ namespace Receptkonyv_MAUI
                 ViewedRecipe.Description = value.Description;
                 ViewedRecipe.Ingredients = value.Ingredients;
                 ViewedRecipe.ImageUrl = value.ImageUrl;
+                ViewedRecipe.UpdateStrings();
                 InitDraft(ViewedRecipe);
             }
         }
         public void InitDraft(Recipe value)
         {
             if (value != null)
+            {
                 Draft = value.GetCopy();
+                Draft.UpdateStrings();
+            }
             else
             {
-                Draft = new Recipe { Name = "---", Ingredients = "---", Description = "---" };
+                Draft = new Recipe();
             }
         }
         [RelayCommand]

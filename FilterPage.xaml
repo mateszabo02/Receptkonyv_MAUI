@@ -5,28 +5,54 @@
              x:Class="Receptkonyv_MAUI.FilterPage"
              x:DataType="local:FilterPageViewModel"
              Title="FilterPage">
-    <VerticalStackLayout WidthRequest="300" HorizontalOptions="Center">
-        <Entry Placeholder="Enter ingredient to filter" Margin="10" Text="{Binding IngredientFilter}"/>
-        <Button Text="Apply Filter" BackgroundColor="#4DB6AC" TextColor="White" FontAttributes="Bold" CornerRadius="12" WidthRequest="200" HeightRequest="48" Margin="10" Command="{Binding ApplyFilterCommand}"/>
-        <CollectionView ItemsSource="{Binding FilteredRecipes}" Margin="10">
+
+    <Grid RowDefinitions="Auto, Auto, *" Padding="10">
+
+        <Entry Grid.Row="0" 
+               Placeholder="Enter ingredient to filter" 
+               Text="{Binding FilterTerm}" 
+               Margin="0,0,0,10"/>
+
+        <Button Grid.Row="1"
+                Text="Apply Filter" 
+                Command="{Binding ApplyFilterAsyncCommand}"
+                BackgroundColor="#4DB6AC" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                CornerRadius="12" 
+                HeightRequest="48" 
+                Margin="0,0,0,10"/>
+
+        <CollectionView Grid.Row="2" 
+                        ItemsSource="{Binding FilteredRecipes}">
+
+            <CollectionView.EmptyView>
+                <Label Text="No recipes found." HorizontalOptions="Center" VerticalOptions="Center"/>
+            </CollectionView.EmptyView>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:Recipe">
-                    <Border Margin="8"
-                            Padding="14"
+                    <Border Margin="5"
+                            Padding="10"
                             BackgroundColor="#FFFDE7"
                             Stroke="#F0E4B8"
-                            StrokeShape="RoundRectangle 16"
-                            Shadow="5,5,10,0.3">
+                            StrokeShape="RoundRectangle 16">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="2,2" Radius="5" Opacity="0.1"/>
+                        </Border.Shadow>
                         <VerticalStackLayout>
                             <Label Text="{Binding Name}"
                                    FontAttributes="Bold"
                                    FontSize="18"
                                    TextColor="#6D4C41"/>
+                            <Label Text="{Binding IngredientsString}"
+                                   FontSize="12"
+                                   TextColor="Gray"/>
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
-    
+    </Grid>
+
 </ContentPage>
