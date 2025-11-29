@@ -7,12 +7,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace Receptkonyv_MAUI
 {
     [QueryProperty(nameof(EditedRecipe), "EditedRecipe")]
     public partial class MainPageViewModel : ObservableObject
     {
+        //private string recipeDbPath = Path.Combine(FileSystem.Current.AppDataDirectory, "recipes.db3");
+        //private SQLiteAsyncConnection recipeDb;
+
+
         public ObservableCollection<Recipe> Recipes { get; set; }
         [ObservableProperty]
         private Recipe selectedRecipe;
@@ -54,6 +59,9 @@ namespace Receptkonyv_MAUI
             {
                 Recipes.Remove(m.Value);
             });
+
+
+
         }
         [RelayCommand]
         public async Task AddRecipeAsync()

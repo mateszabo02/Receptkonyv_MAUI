@@ -10,7 +10,13 @@ namespace Receptkonyv_MAUI
     public partial class Ingredient : ObservableObject
     {
         [ObservableProperty]
+        int id;
+
+        [ObservableProperty]
         string name;
+
+        [ObservableProperty]
+        int receptId;
         public override string ToString()
         {
             return Name;

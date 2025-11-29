@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,8 @@ namespace Receptkonyv_MAUI
 {
     public partial class Recipe : ObservableObject
     {
+        //[PrimaryKey]
+        //[AutoIncrement]
         [ObservableProperty]
         int id;
 

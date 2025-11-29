@@ -50,7 +50,8 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task SaveEditAsync()
         {
-            if (!string.IsNullOrWhiteSpace(Draft.Name) && !string.IsNullOrWhiteSpace(Draft.Description) && Draft.Ingredients.Count()>0){
+            if (!string.IsNullOrWhiteSpace(Draft.Name) && !string.IsNullOrWhiteSpace(Draft.Description) && Draft.Ingredients.Count()>0 && Draft.Ingredients.All(i => !string.IsNullOrWhiteSpace(i.Name)))
+            {
                 var param = new ShellNavigationQueryParameters
             {
                 { "EditedRecipe", Draft }
