@@ -67,19 +67,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="RecipeDetailPage.xaml.cs">
+	  <Compile Update="Views\RecipeDetailPage.xaml.cs">
 	    <DependentUpon>RecipeDetailPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="EditRecipePage.xaml">
+	  <MauiXaml Update="Views\EditRecipePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="FilterPage.xaml">
+	  <MauiXaml Update="Views\FilterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RecipeDetailPage.xaml">
+	  <MauiXaml Update="Views\RecipeDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

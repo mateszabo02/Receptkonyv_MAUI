@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Receptkonyv_MAUI.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,13 +12,22 @@ using System.Threading.Tasks;
 namespace Receptkonyv_MAUI
 {
     [QueryProperty(nameof(EditedRecipe), "Recipe")]
+    [QueryProperty(nameof(IsNew), "IsNew")]
     public partial class EditRecipePageViewModel : ObservableObject
     {
+        public EditRecipePageViewModel(IRecipeRepository repository)
+        {
+            _repository = repository;
+        }
+        private readonly IRecipeRepository _repository;
         [ObservableProperty]
         Recipe editedRecipe;
 
         [ObservableProperty]
         Recipe draft;
+
+        [ObservableProperty]
+        bool isNew;
         partial void OnEditedRecipeChanged(Recipe value)
         {
             InitDraft(value);
@@ -52,10 +62,17 @@ namespace Receptkonyv_MAUI
         {
             if (!string.IsNullOrWhiteSpace(Draft.Name) && !string.IsNullOrWhiteSpace(Draft.Description) && Draft.Ingredients.Count()>0 && Draft.Ingredients.All(i => !string.IsNullOrWhiteSpace(i.Name)))
             {
+                if (IsNew)
+                {
+                    await _repository.AddRecipeAsync(Draft);
+                }
+                else{
+                    await _repository.UpdateRecipeAsync(Draft);
+                }
                 var param = new ShellNavigationQueryParameters
-            {
-                { "EditedRecipe", Draft }
-            };
+                {
+                    { "EditedRecipe", Draft }
+                };
                 await Shell.Current.GoToAsync("..", param);
             }
             else

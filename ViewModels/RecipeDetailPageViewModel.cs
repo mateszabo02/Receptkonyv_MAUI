@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using Receptkonyv_MAUI.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,11 @@ namespace Receptkonyv_MAUI
     [QueryProperty(nameof(EditedRecipe), "EditedRecipe")]
     public partial class RecipeDetailPageViewModel : ObservableObject
     {
+        public RecipeDetailPageViewModel(IRecipeRepository repository)
+        {
+            _repository = repository;
+        }
+        private readonly IRecipeRepository _repository;
         [ObservableProperty]
         Recipe viewedRecipe;
         [ObservableProperty]
@@ -54,7 +60,8 @@ namespace Receptkonyv_MAUI
         {
             var param = new ShellNavigationQueryParameters
             {
-                { "Recipe", ViewedRecipe }
+                { "Recipe", ViewedRecipe },
+                { "IsNew", false   }
             };
             await Shell.Current.GoToAsync("editRecipePage", param);
 
@@ -67,6 +74,7 @@ namespace Receptkonyv_MAUI
         [RelayCommand]
         public async Task DeleteRecipeAsync()
         {
+            await _repository.DeleteRecipeAsync(ViewedRecipe.Id);
             WeakReferenceMessenger.Default.Send(new DeleteRecipeMessage(ViewedRecipe));
             await Shell.Current.GoToAsync("..");
         }

@@ -9,27 +9,26 @@ using System.Threading.Tasks;
 
 namespace Receptkonyv_MAUI
 {
+    [Table("Recipe")]
     public partial class Recipe : ObservableObject
     {
-        //[PrimaryKey]
-        //[AutoIncrement]
-        [ObservableProperty]
-        int id;
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
 
-        [ObservableProperty]
-        string name;
+        [MaxLength(200), NotNull]
+        public string Name { get; set; } = string.Empty;
 
-        [ObservableProperty]
-        string description;
+        [NotNull]
+        public string Description { get; set; } = string.Empty;
 
-        [ObservableProperty]
-        private ObservableCollection<Ingredient> ingredients = new();
+        [Ignore]
+        public ObservableCollection<Ingredient> Ingredients { get; set; } = new();
 
-        [ObservableProperty]
-        string ingredientsString;
+        [Ignore]
+        public string IngredientsString{ get; set; } = string.Empty;
 
-        [ObservableProperty]
-        string imageUrl;
+        public string ImageUrl { get; set; } = string.Empty;
+
         public Recipe GetCopy()
         {
             Id=this.Id;

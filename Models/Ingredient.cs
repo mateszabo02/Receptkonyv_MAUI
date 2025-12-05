@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace Receptkonyv_MAUI
 {
-    public partial class Ingredient : ObservableObject
+    [Table("Ingredients")]
+    public partial class Ingredient
     {
-        [ObservableProperty]
-        int id;
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
 
-        [ObservableProperty]
-        string name;
+        [MaxLength(200), NotNull]
+        public string Name { get; set; } = string.Empty;
 
-        [ObservableProperty]
-        int receptId;
         public override string ToString()
         {
             return Name;

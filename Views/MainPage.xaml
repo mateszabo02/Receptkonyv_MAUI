@@ -24,8 +24,8 @@
                         FontAttributes="Bold"
                         CornerRadius="16"
                         HeightRequest="55"
-                        FontSize="15"
-                        Shadow="0,5,10,0.3,#FF7043">
+                        FontSize="15">
+                    <!--Shadow="0,5,10,0.3,#FF7043"-->
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <GradientStop Color="#FF8A65" Offset="0.0" />
@@ -41,8 +41,8 @@
                         FontAttributes="Bold"
                         CornerRadius="16"
                         HeightRequest="55"
-                        FontSize="15"
-                        Shadow="0,5,10,0.3,#5C6BC0">
+                        FontSize="15">
+                    <!--Shadow="0,5,10,0.3,#5C6BC0"-->
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <GradientStop Color="#7986CB" Offset="0.0" />
